@@ -1,17 +1,30 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
+import java.util.Scanner;
+
+public class MontyHallRunner {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner scan = new Scanner(System.in);
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        System.out.println("Welcome to the Monty Hall Game!\n");
+        System.out.println("There are two goats and a car randomly placed behind doors 1, 2, and 3");
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        MontyHall montyHallGame = new MontyHall();
+
+        System.out.print("Where do you think the car is? Enter 1, 2, or 3: ");
+        int userChoice = scan.nextInt();
+        montyHallGame.setSelectedDoor(userChoice);
+        scan.nextLine();
+
+        montyHallGame.showDoor();
+        System.out.println("One of the goats is behind door number " + montyHallGame.getHintDoor());
+
+
+        System.out.print("Do you want to switch your guess? Yes or No?: ");
+        String switchChoice = scan.nextLine();
+        if (switchChoice.equals("Yes")) {
+            int newDoor = montyHallGame.switchDoor();
+            System.out.println("Guess switch from " + userChoice + " to " + newDoor + ".");
         }
+
+        System.out.print(montyHallGame.checkWin());
     }
 }
