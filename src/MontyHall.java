@@ -9,11 +9,13 @@ public class MontyHall {
     //Constructor that initialize that door with prize
     public MontyHall() {
         car = (int) (Math.random() * 3) + 1;
+        selectedDoor = 0;
+        hintDoor = 0;
     }
 
     //Necessary getters and setters for some of the variables
     public int getHintDoor() {
-        return hintDoor;
+        return hintDoor + 1;
     }
 
     public void setSelectedDoor(int playerChoice) {
@@ -24,7 +26,7 @@ public class MontyHall {
     public void showDoor() {
         List<Integer> doors = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            if (i != car && i != selectedDoor - 1) {
+            if (i != car - 1 && i != selectedDoor - 1) {
                 doors.add(i);
             }
         }
@@ -34,7 +36,12 @@ public class MontyHall {
 
     //Switches the user's choice to the other door not already chosen
     public int switchDoor() {
-        selectedDoor = 3 - selectedDoor - hintDoor;
+        for (int i = 1; true; i++) {
+            if (i != selectedDoor && i != hintDoor + 1) {
+                selectedDoor = i;
+                break;
+            }
+        }
         return selectedDoor;
     }
 
